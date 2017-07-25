@@ -218,7 +218,7 @@ reap baton wmapRef =
 
     goMapRef mapRef = do
         now <- getCurrentTime
-        let isNotStale time = 30 `addUTCTime` time >= now
+        let isNotStale time = 300 `addUTCTime` time >= now
         (newMap, toDestroy) <- I.atomicModifyIORef mapRef $ \m ->
             let (newMap, toDestroy) = findStaleWrap isNotStale m
              in (newMap, (newMap, toDestroy))
